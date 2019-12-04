@@ -4,7 +4,7 @@ h3{
 }
 
 #textInput{
-    font: size 11px;
+    font: size 12px;
     padding: 10px 200px 20px;
     background:#00000;
     text-align: center
@@ -21,9 +21,9 @@ body{
     background-color: pink;
 } */
 
-/* #result{
+#result{
 background:#bcffd5;
-} */
+}
 
 .container {
     margin-top: 60px;
