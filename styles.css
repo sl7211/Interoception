@@ -1,0 +1,31 @@
+h3{
+    color:#00000;
+    font-family: san-serif;
+}
+
+#textInput{
+    font: size 11px;
+    padding: 10px 200px 20px;
+    background:#00000;
+    text-align: center
+}
+body{
+    font-family: "PT Sans", "sans-serif";
+}
+
+
+/* }
+.button.button-primary, button.button-primary, input[type=button].button-primary, input[type=reset].button-primary, input[type=submit].button-primary {
+    font-size: 24px;
+    color: #FFF;
+    background-color: pink;
+} */
+
+/* #result{
+background:#bcffd5;
+} */
+
+.container {
+    margin-top: 60px;
+
+}
