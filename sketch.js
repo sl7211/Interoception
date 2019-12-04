@@ -119,7 +119,7 @@ function generate(existingText) {
       // TODO: What are the defaults?
       let data = {
         seed: txt,
-        length:300,
+        length:500,
         temperature:0.5
       };
 

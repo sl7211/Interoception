@@ -4,8 +4,8 @@ h3{
 }
 
 #textInput{
-    font: size 12px;
-    padding: 10px 200px 20px;
+    font: size 16px;
+    padding: 10px 100px 20px;
     background:#00000;
     text-align: center
 }
@@ -23,7 +23,7 @@ body{
 } */
 
 #result{
-background:#bcffd5;
+background:#add8e6;
 }
 
 .container {
