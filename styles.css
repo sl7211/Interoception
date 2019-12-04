@@ -6,7 +6,8 @@ h3{
 #textInput{
     font: size 16px;
     padding: 10px 100px 20px;
-    background:#00000;
+    background:#lightyellow;
+    text: #grey;
     text-align: center
 }
 body{
