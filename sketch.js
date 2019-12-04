@@ -14,7 +14,7 @@ let charRNN,charRNN2;
 let textInput;
 // let lengthSlider;
 let tempSlider;
-let sound;
+//let sound;
 let button;
 let runningInference = false;
 let foo;
@@ -23,9 +23,9 @@ myRec.continuous = true; // do continuous recognition
 myRec.interimResults = true; // allow partial recognition (faster, less accurate)const url = 'http://localhost:8004/query';
 //let result;
 
-function preload() {
-sound = loadSound('bass.mp3');
-}
+// function preload() {
+// sound = loadSound('bass.mp3');
+// }
 
 document.addEventListener("DOMContentLoaded", () => {
   foo = new p5.Speech();
@@ -44,8 +44,8 @@ function showResult()
 
 function setup() {
   noCanvas();
-  sound.loop();
-  sound.amp(0.1);
+  // sound.loop();
+  // sound.amp(0.1);
 
   // RENAME THE BELOW TO YOUR MODEL PATH
   charRNN = ml5.charRNN('./models/friends/', modelReady);
@@ -125,7 +125,7 @@ function generate(existingText) {
 
       // Generate text with the charRNN
       charRNN.generate(data, gotData);
-      //charRNN2.generate(data, gotData);
+      charRNN2.generate(data, gotData);
 
       // When it's done
       function gotData(err, result) {
@@ -145,21 +145,21 @@ function generate(existingText) {
           runningInference = false;
           // text2Image();
 
-          const lastCharacters = result.sample.substr(result.sample.length - 20);
+          const lastCharacters = result.sample.substr(result.sample.length - 50);
           generate(lastCharacters);
         }
       }
     }
   }
 }
-function text2Image() {
-  const postData = {
-    "caption": textInput.value()
-  };
-  // Send HTTP Post request to Runway with text, runway will return the output image src
-  httpPost(url, 'json', postData, (output) => {
-    if (output &&  output.result) {
-      createImg(output.result);
-    }
-  })
-}
+// function text2Image() {
+//   const postData = {
+//     "caption": textInput.value()
+//   };
+//   // Send HTTP Post request to Runway with text, runway will return the output image src
+//   httpPost(url, 'json', postData, (output) => {
+//     if (output &&  output.result) {
+//       createImg(output.result);
+//     }
+//   })
+// }
