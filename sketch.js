@@ -119,12 +119,12 @@ function generate(existingText) {
       // TODO: What are the defaults?
       let data = {
         seed: txt,
-        length:100,
+        length:300,
         temperature:0.5
       };
 
       // Generate text with the charRNN
-      //charRNN.generate(data, gotData);
+      charRNN.generate(data, gotData);
       charRNN2.generate(data, gotData);
 
       // When it's done
