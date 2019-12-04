@@ -48,7 +48,7 @@ function setup() {
   // sound.amp(0.1);
 
   // RENAME THE BELOW TO YOUR MODEL PATH
-  charRNN = ml5.charRNN('./models/friends/', modelReady);
+  //charRNN = ml5.charRNN('./models/friends/', modelReady);
   charRNN2 = ml5.charRNN('./models/woolf/', modelReady);
 
   // Grab the DOM elements
@@ -125,7 +125,7 @@ function generate(existingText) {
 
       // Generate text with the charRNN
       charRNN2.generate(data, gotData);
-      charRNN.generate(data, gotData);
+      //charRNN.generate(data, gotData);
 
       // When it's done
       function gotData(err, result) {
