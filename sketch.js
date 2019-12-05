@@ -15,7 +15,8 @@ let textInput;
 // let lengthSlider;
 let tempSlider;
 //let sound;
-let button;
+let generateButton;
+let pauseButton;
 let runningInference = false;
 let foo;
 let myRec = new p5.SpeechRec('en-US', parseResult); // new P5.SpeechRec object
@@ -48,6 +49,7 @@ function setup() {
   // sound.amp(0.1);
 
   // RENAME THE BELOW TO YOUR MODEL PATH
+  select('#status').hide();
   charRNN = ml5.charRNN('./models/friends/', modelReady);
   charRNN2 = ml5.charRNN('./models/woolf/', modelReady);
 
@@ -55,10 +57,12 @@ function setup() {
   textInput = select('#textInput');
   // lengthSlider = select('#lenSlider');
   // tempSlider = select('#tempSlider');
-  button = select('#generate');
+  generateButton = select('#generate');
+  pauseButton = select('#pause');
 
   // DOM element events
-  button.mousePressed(generate);
+  generateButton.mousePressed(generate);
+  pauseButton.mousePressed(pauseOrResume);
   // lengthSlider.input(updateSliders);
   // tempSlider.input(updateSliders);
   myRec.onResult = showResult;
@@ -90,15 +94,55 @@ function modelReady() {
 
 var myText = ''
 
+function pauseOrResume() {
+  if (select('#status').html() !== 'Ready!') {
+    return
+  }
+  const pauseOrResumeButton = select('#pause');
+  const text = pauseOrResumeButton.html();
+  if (text.toLowerCase() === 'pause') {
+    foo.pause()
+    pauseOrResumeButton.html('Resume');
+  } else if (text.toLowerCase() === 'resume') {
+    foo.resume();
+    pauseOrResumeButton.html('Pause');
+  }
+}
+
+function generateCustomerBox(text) {
+  return `<div class='customerBox'>
+    <div class="customerText">
+    <p><span id="result">${text}</span></p>
+    </div>
+  </div>
+  `
+}
+
+function generateBotBox(text) {
+  return `
+  <div class='botBox'>
+    <div class="botText">
+    <p><span id="result">${text}</span></p>
+    </div>
+  </div>
+  `
+}
+
+function generateThinkingBox() {
+  return `
+    <div class='thinkingBox'>
+    ...
+    </div>
+  `
+}
+
 // Generate new text
 function generate(existingText) {
   // prevent starting inference if we've already started another instance
   // TODO: is there better JS way of doing this?
  if(!runningInference) {
     runningInference = true;
-
-    // Update the status log
-    select('#status').html('Generating...');
+    foo.cancel();
 
     // Grab the original text
     let txt;
@@ -111,9 +155,17 @@ function generate(existingText) {
       txt = original.toLowerCase();
     }
 
-    console.log('generating text with seed: ', txt);
     // Check if there's something to send
     if (txt.length > 0) {
+      generateButton.elt.disabled = true;
+      generateButton.hide();
+      pauseButton.hide();
+      select('.bodyText').elt.innerHTML += generateCustomerBox(txt);
+      const tempBody = select('.bodyText').elt.innerHTML;
+      textInput.value('');
+      // Update the status log
+      select('#status').html('Thinking...');
+      select('.bodyText').elt.innerHTML += generateThinkingBox();
       // This is what the LSTM generator needs
       // Seed text, temperature, length to outputs
       // TODO: What are the defaults?
@@ -125,30 +177,29 @@ function generate(existingText) {
 
       // Generate text with the charRNN
       charRNN2.generate(data, gotData);
-      charRNN.generate(data, gotData);
+      // charRNN.generate(data, gotData);
 
       // When it's done
       function gotData(err, result) {
+        select('.bodyText').elt.innerHTML = tempBody;
         if (err) {
           console.error(err);
         }
         if (result) {
           // Update the status log
+          generateButton.show();
+          pauseButton.show();
           select('#status').html('Ready!');
-          //select('#result').html(txt + result.sample);
-          select('#original').html(txt);
-          myText += result.sample;
-          select('#result').html(myText);
-          textInput = select('#textInput');
-          textInput.value(txt + result.sample);
-          foo.speak(result.sample); // say something
+          select('.bodyText').elt.innerHTML += generateBotBox(result.sample);
+          foo.resume();
+          foo.speak(result.sample);
+          generateButton.elt.disabled = false;
           runningInference = false;
           // text2Image();
-
-          const lastCharacters = result.sample.substr(result.sample.length - 50);
-          generate(lastCharacters);
         }
       }
+    } else {
+      generateButton.elt.disabled = false;
     }
   }
 }

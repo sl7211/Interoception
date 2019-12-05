@@ -34,18 +34,23 @@
        <i><b>Bathos:</b> An effect of anticlimax created by an unintentional lapse in mood from the sublime to the trivial or ridiculous.
         This may be either accidental (through artistic ineptitude) or intentional (for comic effect).
        </i></p> -->
-    <p>Type your thoughts:
-      <p></p><input id="textInput" value=""/>
-    </p>
+
     <!-- <p>length:
       <input id="lenSlider" type="range" min="10" max="500" value="100"> <span id="length">100</span></p>
       <p>temperature: -->
         <!-- <input id="tempSlider" type="range" min="0" max="1" step="0.01"><span id="temperature">0.5</span></p> -->
         <p id="status">Loading Model</p>
-        <button class="button-primary" id="generate">Generate</button>
+        <div class="bodyText">
 
+        </div>
         <p><span id="original"></span></p>
-        <p><span id="result"></span></p>
+        <div>
+          <input id="textInput" value=""/>
+        </div>
+        <div>
+          <button style="float: right;" class="button-primary" id="generate">Chat</button>
+          <button style="float: left;" class="button-primary" id="pause">Pause</button>
+        </div>
 
       </div>
 

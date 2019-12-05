@@ -4,15 +4,15 @@ h3{
 }
 
 #textInput{
-    font: size 16px;
-    padding: 10px 100px 20px;
-    background:lightyellow;
-    text: grey;
-    text-align: center
+    font-size: 18px;
+    width: 100%;
+    font-family: san-serif;
+    text-align: left;
+    padding: 10px;
 }
 body{
-    font-family: "PT Sans", "sans-serif";
-  background-color: lightblue;
+  font: size 60px;
+    font-family: "sans-serif";
 }
 
 
@@ -23,8 +23,46 @@ body{
     background-color: pink;
 } */
 
-#result{
-background:lightyellow;
+.bodyText {
+  height: 55%;
+  overflow-y: auto;
+}
+
+.botText{
+  color: white;
+  padding: 20px;
+  font-size: 14px;
+  border-radius: 20px;
+  background:rgb(153, 153, 153);
+}
+
+.botBox {
+  float: left;
+  width: 60%;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+.customerBox{
+  float: right;
+  width: 60%;
+}
+
+.customerText{
+  color: white;
+  padding: 20px;
+  font-size: 16px;
+  border-radius: 20px;
+  background:rgb(0, 122, 255);
+}
+
+.thinkingBox {
+  float: left;
+  color: rgb(153, 153, 153);
+  width: 60%;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  font-size: 45px;
 }
 
 .container {
